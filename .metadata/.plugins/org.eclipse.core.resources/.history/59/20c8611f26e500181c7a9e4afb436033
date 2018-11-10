@@ -1,0 +1,7 @@
+
+public interface User1 {
+	
+	public int getID();
+	
+	
+}
