@@ -1,9 +1,11 @@
+import java.util.ArrayList;
 
 public class Manager implements User1{
 	private int ID;
 	private String password;
 	private String username;
-	
+	public ArrayList<String> reservations;
+
 	
 	
 	
