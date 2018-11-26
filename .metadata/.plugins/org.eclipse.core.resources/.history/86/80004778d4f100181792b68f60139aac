@@ -1,0 +1,13 @@
+import java.util.ArrayList;
+
+public class Manager extends User{
+	private int ID;
+	private String password;
+	private String username;
+	public ArrayList<String> reservations;
+
+	
+	
+
+
+}
