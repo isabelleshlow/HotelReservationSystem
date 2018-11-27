@@ -1,0 +1,26 @@
+import java.awt.FlowLayout;
+
+import javax.swing.*;
+
+public class HotelReservationSystem {
+
+	public static void main(String[] args)
+	{
+		JFrame frame = new JFrame(50,50);
+		
+		
+		//add "Sign up" and "Sign in" buttons
+		JButton signUpButton = new JButton("Sign Up");
+		JButton signInButton = new JButton("Sign In");
+		
+		
+		frame.setLayout(new FlowLayout());
+		frame.add(signUpButton);
+		frame.add(signInButton);
+		
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.pack();
+		frame.setVisible(true);
+		
+	}
+}

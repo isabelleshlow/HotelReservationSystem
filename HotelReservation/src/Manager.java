@@ -2,15 +2,10 @@ import java.util.ArrayList;
 
 public class Manager extends User{
 
-	private int ID;
-	private String password;
-	private String username;
-	public ArrayList<String> reservations;
+	//public ArrayList<String> reservations;
 
-		public Manager(int id, String password, String username) {
+	public Manager(int id, String password, String username) {
 		super(id, password, username);
-		}
-	
-
-
+		// TODO Auto-generated constructor stub
+	}
 }
