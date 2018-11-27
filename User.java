@@ -1,15 +1,22 @@
+package hotel;
+
+import java.util.ArrayList;
+
 public class User {
-    private int id;
+    private String id;
     private String password;
     private String username;
+    private ArrayList<Reservation> currentTransaction;
+    ArrayList<Reservation> reservations;
     
-    public User(int id, String password, String username) {
+    public User(String id, String password, String username) {
         this.id = id;
         this.password = password;
         this.username = username;
+        currentTransaction = new ArrayList<Reservation>();
     }
     
-    public int getId() {
+    public String getId() {
         return id;
     }
     
@@ -21,8 +28,21 @@ public class User {
         return username;
     }
     
-    public void setId(int newId) {
+    public void setId(String newId) {
         this.id = newId;
+    }
+    
+    public ArrayList<Reservation> getReservations() {
+    	return reservations;
+    }
+    
+    public ArrayList<Reservation> getCurrentReservation() {
+    	return currentTransaction;
+    }
+    
+    public void addReservation(Reservation r) {
+    	currentTransaction.add(r);
+    	reservations.add(r);
     }
     
     public void setPassword(String newPwd) {
@@ -33,14 +53,13 @@ public class User {
         this.username = newName;
     }
     
-    public boolean verification(int id, String password) {
-        return this.id == id && this.password.equals(password);
+    public boolean verification(String id, String password) {
+        return this.id.equals(id) && this.password.equals(password);
     }
     
     public String toString() {
-        return "ID: " + id + "\n Name: " + username;
+        return "Name: " + username + "  ID: " + id;
     }
 }
-
 
 
