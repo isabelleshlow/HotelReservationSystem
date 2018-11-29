@@ -2,12 +2,10 @@ package hotel;
 
 public class SimpleReceipt implements ReceiptFormatter {
 	private Guest guest;
-	private String transactionID;
 	private int total;
 	
-	public SimpleReceipt(Guest g, String id) {
+	public SimpleReceipt(Guest g) {
 		this.guest = g;
-		this.transactionID = id;
 		total = 0;
 	}
 	

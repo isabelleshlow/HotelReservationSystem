@@ -6,7 +6,7 @@ public class Manager extends User {
 		super(id, password, username);
 	}
 
-	public void checkReservation(String guestId, ReservationList rl) {
+	public void viewRooms(String guestId, ReservationList rl) {
 		
 	}
 }

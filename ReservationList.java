@@ -1,6 +1,12 @@
 package hotel;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -54,8 +60,30 @@ public class ReservationList implements Serializable {
 	}
 	
 	public void save() {
-		
+	    try {
+	        File file = new  File("reservations.txt");
+
+	        if (!file.exists()) {
+	            file.createNewFile();
+	        }
+
+	        FileWriter fw = new FileWriter(file.getAbsoluteFile());
+	        BufferedWriter bw = new BufferedWriter(fw);
+	        
+			DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+			for (Reservation r: list) {
+				bw.write(r.getGuestId());
+				bw.write(dateFormat.format(r.getStartDate()) + "-" + dateFormat.format(r.getEndDate()));
+				bw.write("Room number #" + r.getRoomNumber());
+			}
+	        bw.close();
+	    } 
+	    
+	    catch (IOException e) {
+	        e.printStackTrace();
+	    }
 	}
+	
 	
 	public boolean exceedStayLength(Date date1, Date date2) {
 		int daysDifference = (int) ((date2.getTime() - date1.getTime()) / (24 * 60 * 60 * 1000));
