@@ -17,17 +17,21 @@ public class ReservationList implements Serializable {
 		
 	}
 
+	public int size() {
+		return list.size();
+	}
+	
 	public Iterator<Reservation> getReservationList() {
 		return list.iterator();
 	}
 	
-	public Iterator<Reservation> loadUserReservations(String id) {
+	public ArrayList<Reservation> loadUserReservations(String id) {
 		ArrayList<Reservation> userReservations = new ArrayList<>();
 		for (Reservation r: list) {
 			if (r.getGuestId().equals(id))
 				userReservations.add(r);
 		}
-		return userReservations.iterator();
+		return userReservations;
 	}
 	
 	public void add(Reservation r) {

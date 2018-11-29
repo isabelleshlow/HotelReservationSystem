@@ -11,9 +11,9 @@ public class Room {
 	private int price;
 	private ReservationList reservationList;
 
-	public Room(String roomType, int rn) {
-		this(roomType);
+	public Room(int rn, int p) {
 		this.roomNumber = rn;
+		this.price = p;
 	}
 	
 	public Room(String roomType) {

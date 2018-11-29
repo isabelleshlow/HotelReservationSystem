@@ -12,8 +12,11 @@ public class SimpleReceipt implements ReceiptFormatter {
 	}
 	
 	public String printReceipt() {
-		String receipt = "Simple receipt for " + guest.toString() + "\n Reserved room(s):";
-		 
-		return receipt;
+		String receipt = "Simple receipt for " + guest.toString() + "\n Reserved room(s): \n";
+		for (Reservation r: guest.getCurrentReservation()) {
+			total += r.getPrice();
+			receipt += Integer.toString(r.getRoomNumber()) + "\n";
+		}
+		return receipt += "\n Total amount due: " + total;
 	}
 }
