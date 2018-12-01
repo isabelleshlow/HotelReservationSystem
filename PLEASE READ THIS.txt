@@ -1,0 +1,2 @@
+please save all class files to: GitHub\HotelReservationSystem\HotelReservationSystemProject\HotelReservation\src\hotel 
+otherwise it would break the bin/.classpath files and the next person would not be able to run the project
