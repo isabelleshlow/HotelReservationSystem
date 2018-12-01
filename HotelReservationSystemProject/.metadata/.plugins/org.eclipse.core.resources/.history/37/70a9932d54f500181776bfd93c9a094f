@@ -1,0 +1,36 @@
+package hotel;
+
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+
+public class ReservationFrame {
+	
+	public ReservationFrame()
+	{
+		makeReservationFrame();
+	}
+
+	public void makeReservationFrame(){
+		
+		JFrame frame = new JFrame();
+		final int FIELD_WIDTH = 30;
+		final JTextField text = new JTextField(FIELD_WIDTH);
+		text.setText("Hello! Today's date is: " + LocalDate.now().toString());
+		
+		//add "Sign up" and "Sign in" buttons
+		JButton signUpButton = new JButton("Sign Up");
+		JButton signInButton = new JButton("Sign In");
+		
+		
+		frame.setLayout(new FlowLayout());
+		frame.add(text);
+		frame.add(signUpButton);
+		frame.add(signInButton);
+		
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.pack();
+		frame.setVisible(true);
+		
+		
+	}
+}

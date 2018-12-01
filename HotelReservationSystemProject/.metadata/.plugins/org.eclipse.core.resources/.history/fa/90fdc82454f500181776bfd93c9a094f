@@ -1,0 +1,13 @@
+package hotel;
+
+public class ReservationFrame {
+	
+	public ReservationFrame()
+	{
+		makeReservationFrame();
+	}
+
+	public void makeReservationFrame(){
+		
+	}
+}
