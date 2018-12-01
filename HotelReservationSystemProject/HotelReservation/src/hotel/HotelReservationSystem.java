@@ -3,8 +3,10 @@ package hotel;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,7 +17,9 @@ import javax.swing.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
-	import javax.swing.*;
+import java.util.Scanner;
+
+import javax.swing.*;
 
 	public class HotelReservationSystem {
 		
@@ -169,7 +173,8 @@ import java.util.Calendar;
 						@Override
 						public void mouseClicked(MouseEvent e) {
 							// TODO Auto-generated method stub
-							
+							signIn();
+							frame.dispose();
 						}
 
 						@Override
@@ -270,8 +275,6 @@ import java.util.Calendar;
 								String aName = (answerTextList.get(0)).getText();
 								String aID = (answerTextList.get(1)).getText();
 								String aPassword = (answerTextList.get(2)).getText();
-								User newUser = new Guest(aName, aID, aPassword);
-
 
 								try {
 							        File file = new  File("userList.txt");
@@ -284,7 +287,7 @@ import java.util.Calendar;
 							        BufferedWriter bw = new BufferedWriter(fw);
 							        PrintWriter pw = new PrintWriter(bw);
 							        
-									pw.println(aName+","+aID+","+aPassword+"\n");
+									pw.println(aName+","+aID+","+aPassword);
 							        bw.close();
 							        
 							        
@@ -330,6 +333,129 @@ import java.util.Calendar;
 			
 		}
 		
+		public static void signIn(){
+			JFrame frame = new JFrame();
+			frame.setLayout(new FlowLayout());
+			final int FIELD_WIDTH = 30;
+			String[] requestTexts = {"ID: ", "Password: "};
+			int fieldNum = requestTexts.length;
+
+			
+			 
+		    SpringLayout layout = new SpringLayout(); 
+		    ArrayList<JTextField> answerTextList = new ArrayList<>();
+			 for (int i = 0; i<fieldNum; i++)
+			{
+			Container aContainer = new Container();
+		    aContainer.setLayout(layout);
+
+			JLabel text = new JLabel(requestTexts[i]);
+			JTextField textAnswer = new JTextField(FIELD_WIDTH);
+			text.setLabelFor(textAnswer);
+			
+			aContainer.add(text);
+			aContainer.add(textAnswer);
+			
+			layout.putConstraint(SpringLayout.WEST, textAnswer, 10, SpringLayout.EAST, text);
+			layout.putConstraint(SpringLayout.NORTH, textAnswer, 10, SpringLayout.NORTH, aContainer);
+			
+			layout.putConstraint(SpringLayout.EAST, aContainer,10,SpringLayout.EAST, textAnswer);
+			layout.putConstraint(SpringLayout.SOUTH, aContainer, 10 , SpringLayout.SOUTH, textAnswer);
+			
+			answerTextList.add(textAnswer);
+			frame.add(aContainer);
+			}
+			 
+			 
+			 JButton logInButton = new JButton("Log In");
+			 logInButton.addMouseListener(
+						new MouseListener(){
+
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								// TODO Auto-generated method stub
+								
+								String emptyAreaError = new String("Please fill out this area");
+								boolean startAccCheck = false;
+								for (int i = 0; i<answerTextList.size();i++)
+								{
+									if((answerTextList.get(i).getText()).equals("") || (answerTextList.get(i).getText()).equals(emptyAreaError) )
+									{
+										answerTextList.get(i).setText(emptyAreaError);
+										startAccCheck = false;
+										break;
+									}
+									else {startAccCheck = true;}
+									
+							
+								}
+								
+								File userList = new File("userList.txt");
+							//	Scanner in = new Scanner(new FileReader(userList));
+								boolean logInSucess = false;
+								if (startAccCheck == true)
+								{
+									    try {
+
+									    
+										Scanner in = new Scanner(new FileReader(userList));
+										while(in.hasNextLine()){
+											
+											String currentLine = in.nextLine();
+											String[] split = currentLine.split(",");
+									        User tempUser = new Guest(split[0],split[1],split[2]);
+
+
+									        logInSucess = tempUser.verification((answerTextList.get(0).getText()), (answerTextList.get(1).getText()));
+									        
+									        if (logInSucess==true)
+									        {
+									        	ReservationFrame resFrame = new ReservationFrame();
+									        	resFrame.makeReservationFrame();
+									        	frame.dispose();
+									        	break;
+									        }
+											
+										}
+							
+									        
+									    } catch (IOException e1) {e1.printStackTrace();}
+								}
+								
+								
+								
+								
+							}
+
+							@Override
+							public void mouseEntered(MouseEvent e) {
+							}
+
+							@Override
+							public void mouseExited(MouseEvent e) {
+								
+							}
+
+							@Override
+							public void mousePressed(MouseEvent e) {
+								
+							}
+
+							@Override
+							public void mouseReleased(MouseEvent e) {
+							}
+							
+						});
+			 
+			 frame.add(logInButton);
+			
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			frame.pack();
+			frame.setVisible(true);
+
+			
+			
+		}
 		public static void aManagerOption()
 		{
 			/*

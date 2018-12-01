@@ -15,8 +15,7 @@ public class ReservationFrame {
 	public void makeReservationFrame(){
 		
 		JFrame frame = new JFrame();
-		final int FIELD_WIDTH = 30;
-		final JTextField text = new JTextField(FIELD_WIDTH);
+		final JLabel text = new JLabel("What would you like to do? ");
 		
 		//add "Sign up" and "Sign in" buttons
 		JButton makeReservationButton = new JButton("Make a Reservation");
@@ -30,7 +29,7 @@ public class ReservationFrame {
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						// TODO Auto-generated method stub
-						
+						makeReservation();
 						frame.dispose();
 					}
 
@@ -106,5 +105,29 @@ public class ReservationFrame {
 		frame.setVisible(true);
 		
 		
+	}
+	public void makeReservation()
+	{
+		JFrame frame = new JFrame();
+		final JLabel text = new JLabel("Room type: ");
+		
+		//add "Sign up" and "Sign in" buttons
+		JButton luxuriousButton = new JButton("$300");
+		JButton economicButton = new JButton("$100");
+		JButton showAllButton = new JButton("Show Me Available Rooms");
+		
+		
+		frame.setLayout(new FlowLayout());
+		
+		//TODO need to add in the selectable date stuffs//
+		
+		frame.add(text);
+		frame.add(luxuriousButton);
+		frame.add(economicButton);
+		frame.add(showAllButton);
+		
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.pack();
+		frame.setVisible(true);
 	}
 }

@@ -8,7 +8,7 @@ public abstract class User {
     private String username;
     ArrayList<Reservation> reservations;
     
-    public User(String id, String password, String username) {
+    public User(String username,String id, String password) {
         this.id = id;
         this.password = password;
         this.username = username;
@@ -36,7 +36,13 @@ public abstract class User {
     }
     
     public boolean verification(String id, String password) {
-        return this.id.equals(id) && this.password.equals(password);
+        if(this.id.equals(id) && this.password.equals(password))
+        {
+        	System.out.println("Log in Sucess");
+        	return true;
+        }
+        System.out.println("Log in Fail");
+        return false;
     }
     
     public String toString() {
