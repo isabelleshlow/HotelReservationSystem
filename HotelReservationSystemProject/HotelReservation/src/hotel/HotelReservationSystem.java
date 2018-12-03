@@ -389,9 +389,7 @@ import javax.swing.*;
 									
 							
 								}
-								
 								File userList = new File("userList.txt");
-							//	Scanner in = new Scanner(new FileReader(userList));
 								boolean logInSucess = false;
 								if (startAccCheck == true)
 								{
@@ -400,12 +398,18 @@ import javax.swing.*;
 									    
 										Scanner in = new Scanner(new FileReader(userList));
 										while(in.hasNextLine()){
-											
+										
 											String currentLine = in.nextLine();
+										//	System.out.println(currentLine);
 											String[] split = currentLine.split(",");
+										//	System.out.println(split[0]+split[1]+split[2]);
 									        User tempUser = new Guest(split[0],split[1],split[2]);
 
+									    //    System.out.println(split[1].length());
+									     //   System.out.println(split[2].length());
 
+									      //  System.out.println(answerTextList.get(0).getText());
+									       // System.out.println(answerTextList.get(1).getText());
 									        logInSucess = tempUser.verification((answerTextList.get(0).getText()), (answerTextList.get(1).getText()));
 									        
 									        if (logInSucess==true)
@@ -415,6 +419,7 @@ import javax.swing.*;
 									        	frame.dispose();
 									        	break;
 									        }
+									        
 											
 										}
 							

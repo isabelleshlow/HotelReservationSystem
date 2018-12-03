@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
 
 public class Reservation implements Serializable {
 	private Date startDate;
@@ -12,9 +13,9 @@ public class Reservation implements Serializable {
 	private Room room;
 	private String transactionId;
 	
-	public Reservation(Date sd, Date ed, String id) {
-		this.startDate = sd;
-		this.endDate = ed;
+	public Reservation(Date start, Date end, String id) {
+		this.startDate = start;
+		this.endDate = end;
 		this.guestId = id;
 	}
 	
@@ -61,5 +62,9 @@ public class Reservation implements Serializable {
 		String stayDate = "Check-in Date: " + dateToString(startDate) + "\n Check-out Date: " + dateToString(endDate);
 		return roomNumType + stayDate;
 	}
+	
+	
+	
+	
 }
 

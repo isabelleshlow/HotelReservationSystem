@@ -13,7 +13,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
-
+/*
+ *ReservationList for each individual user
+ */
 public class ReservationList implements Serializable {
 	
 	private ArrayList<Reservation> list;
@@ -72,9 +74,8 @@ public class ReservationList implements Serializable {
 	        
 			DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 			for (Reservation r: list) {
-				bw.write(r.getGuestId());
-				bw.write(dateFormat.format(r.getStartDate()) + "-" + dateFormat.format(r.getEndDate()));
-				bw.write("Room number #" + r.getRoomNumber());
+				bw.write(r.getGuestId()+","+dateFormat.format(r.getStartDate())+","+dateFormat.format(r.getClass())+","+r.getRoomNumber());
+				//guestId,startDate,endDate,roomNumber
 			}
 	        bw.close();
 	    } 

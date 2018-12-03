@@ -1,20 +1,23 @@
 package hotel;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 
-public class Room {
+public class Room implements RoomBase{
 	private int roomNumber;
 	private String roomType;
 	private int price;
 	private ReservationList reservationList;
+	private ArrayList<LocalDate> allBookedDates;
 
 	public Room(int rn, int p) {
 		this.roomNumber = rn;
 		this.price = p;
 	}
+	public Room(){}
 	
 	public Room(String roomType) {
 		if (roomType.substring(0, 1).equalsIgnoreCase("E")) {
@@ -46,6 +49,19 @@ public class Room {
 		return reservationList;
 	}
 	
+	public void setRoomType(String type){
+		roomType = type;
+		
+		//????????????
+		if (roomType.substring(0, 1).equalsIgnoreCase("E")) {
+			this.price = 100;
+		}
+		
+		else if (roomType.substring(0, 1).equalsIgnoreCase("L")) {
+			this.price = 300;
+		}
+	}
+	
 	public void setReservation(ReservationList rl) {
 		reservationList = rl;
 	}
@@ -58,20 +74,25 @@ public class Room {
 		reservationList.cancel(r);
 	}
 	
-	public boolean isAvailable(Date d1, Date d2) {
-		Iterator<Reservation> it = reservationList.getReservationList();
-		while (it.hasNext()) {
-			Reservation rv = it.next();
-			Date startDate = rv.getStartDate();
-			Date endDate = rv.getEndDate();
-			
-			if(((startDate.after(d1) || startDate.equals(d1))
-	          && (startDate.before(d2)) || startDate.equals(d2))
-	          ||  ((endDate.after(d1) || endDate.equals(d1)) 
-              && (endDate.before(d2) || endDate.equals(d2))))
-					return false;
+	@Override
+	public void book(LocalDate date)
+	{
+		allBookedDates.add(date);
+	}
+	
+	@Override
+	public boolean isBooked(LocalDate aDate)
+	{
+		boolean booked = false;
+		for(LocalDate date : allBookedDates)
+		{
+			if(date.isEqual(aDate))
+			{
+				booked = true;
+				break;
+			}
 		}
-		return true;
+		return booked;
 	}
 	
 	
