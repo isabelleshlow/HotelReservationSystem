@@ -3,7 +3,7 @@ package hotel;
 import java.util.ArrayList;
 
 public abstract class User {
-    private String id;
+    private static String id;
     private String password;
     private String username;
     ArrayList<Reservation> reservations;
@@ -15,7 +15,7 @@ public abstract class User {
 
     }
     
-    public String getId() {
+    public static String getId() {
         return id;
     }
     

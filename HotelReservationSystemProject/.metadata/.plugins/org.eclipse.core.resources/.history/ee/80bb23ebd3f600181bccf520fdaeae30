@@ -1,0 +1,12 @@
+package hotel;
+import java.time.LocalDate;
+
+public interface RoomBase 
+{
+	public int getRoomNumber();
+	public int getRoomPrice();
+	public String getRoomType();
+	
+	
+	
+}

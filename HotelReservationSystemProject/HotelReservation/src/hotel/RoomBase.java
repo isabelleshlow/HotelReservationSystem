@@ -3,6 +3,14 @@ import java.time.LocalDate;
 
 public interface RoomBase 
 {
-	void book(LocalDate date);
-	boolean isBooked(LocalDate date);
+	public int getRoomNumber();
+	public int getRoomPrice();
+	public String getRoomType();
+	public ReservationList getReservations();
+	public void setRoomType(String type);
+	public void setReservation(ReservationList rl);
+	public void addReservation(Reservation r);
+	public void cancelReservation(Reservation r);
+	
+	
 }

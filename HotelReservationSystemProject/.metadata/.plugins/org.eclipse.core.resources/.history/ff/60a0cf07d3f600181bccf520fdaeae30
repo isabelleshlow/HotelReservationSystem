@@ -1,0 +1,8 @@
+package hotel;
+import java.time.LocalDate;
+
+public interface RoomBase 
+{
+	void book(LocalDate date);
+	boolean isBooked(LocalDate date);
+}

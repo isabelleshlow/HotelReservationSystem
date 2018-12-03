@@ -33,22 +33,24 @@ public class Room implements RoomBase{
 		reservationList = new ReservationList();
 	}
 	
+	@Override
 	public int getRoomNumber() {
 		return roomNumber;
 	}
 	
+	@Override
 	public int getRoomPrice() {
 		return price;
 	}
-	
+	@Override
 	public String getRoomType() {
 		return roomType;
 	}
-	
-	public ReservationList getReservations( ) {
+	@Override
+	public ReservationList getReservations() {
 		return reservationList;
 	}
-	
+	@Override
 	public void setRoomType(String type){
 		roomType = type;
 		
@@ -61,39 +63,20 @@ public class Room implements RoomBase{
 			this.price = 300;
 		}
 	}
-	
+	@Override
 	public void setReservation(ReservationList rl) {
 		reservationList = rl;
 	}
-	
+	@Override
 	public void addReservation(Reservation r) {
 		reservationList.add(r);
 	}
-	
+	@Override
 	public void cancelReservation(Reservation r) {
 		reservationList.cancel(r);
 	}
 	
-	@Override
-	public void book(LocalDate date)
-	{
-		allBookedDates.add(date);
-	}
-	
-	@Override
-	public boolean isBooked(LocalDate aDate)
-	{
-		boolean booked = false;
-		for(LocalDate date : allBookedDates)
-		{
-			if(date.isEqual(aDate))
-			{
-				booked = true;
-				break;
-			}
-		}
-		return booked;
-	}
+
 	
 	
 }

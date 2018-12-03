@@ -1,0 +1,7 @@
+package hotel;
+import java.time.LocalDate;
+
+public interface RoomBase 
+{
+	
+}

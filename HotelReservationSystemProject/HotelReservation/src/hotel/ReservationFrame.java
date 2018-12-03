@@ -272,6 +272,114 @@ public class ReservationFrame {
 		frame.setVisible(true);
 	}
 	
+	public String toString(String room, String start, String end){
+		return String.format("Room #: "+room+" Start date: "+start+" End date: "+end+"\n");
+	}
+	
+	
+	
+	//////////NEED TO FINISH
+	public void viewCancelReservation(){
+		JFrame frame = new JFrame();
+		final JLabel reservationsText = new JLabel("Your room reservations: ");
+		
+		//add "Sign up" and "Sign in" buttons
+		JButton cancelButton = new JButton("Cancel");
+		
+		//create Check in and Check out Date options
+		JPanel cont1 = new JPanel();
+
+		String userID = User.getId();
+		File userList = new File("reservations.txt");
+	    try {
+		Scanner in = new Scanner(new FileReader(userList));
+		
+		while(in.hasNextLine()){
+			
+				String currentLine = in.nextLine();
+				String[] split = currentLine.split(",");
+				
+				String tempID = split[0];
+				
+				if (tempID.equals(userID)){
+					JPanel panel = new JPanel();
+					String listing = toString(split[3],split[1],split[2]);
+					JTextField aListing = new JTextField(listing);
+					
+					panel.setLayout(new FlowLayout());
+					panel.add(aListing);
+					panel.add(cancelButton);
+					
+					//add MouseListeners to buttons
+					cancelButton.addMouseListener(
+							new MouseListener(){
+
+								@Override
+								public void mouseClicked(MouseEvent e) {
+									// TODO Auto-generated method stub
+									//TODO figure out how to delete text from files
+									
+									
+									frame.repaint();
+								}
+
+								@Override
+								public void mouseEntered(MouseEvent e) {
+									// TODO Auto-generated method stub
+									
+								}
+
+								@Override
+								public void mouseExited(MouseEvent e) {
+									// TODO Auto-generated method stub
+									
+								}
+
+								@Override
+								public void mousePressed(MouseEvent e) {
+									// TODO Auto-generated method stub
+									
+								}
+
+								@Override
+								public void mouseReleased(MouseEvent e) {
+									// TODO Auto-generated method stub
+									
+								}
+								
+							});
+					
+					
+				}
+				
+				
+				
+	        }	
+		}
+
+	        
+	     catch (IOException e1) {e1.printStackTrace();}
+	
+	
+		
+		
+		
+		frame.setLayout(new BorderLayout());
+		
+		
+		frame.setSize(400, 300);
+		
+		//TODO need to add in the selectable date stuffs/////////////
+		cont1.add(cancelButton);
+		frame.add(reservationsText, BorderLayout.PAGE_START);
+		frame.add(cont1, BorderLayout.CENTER);
+		
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.pack();
+		frame.setVisible(true);
+		
+	}
+	
 //part of Stina and Mata's code from Room
 	public void isAvailable(Date start, Date end) throws ParseException {
 		boolean roomAvail = false;
@@ -283,15 +391,11 @@ public class ReservationFrame {
 					
 						String currentLine = in.nextLine();
 						String[] split = currentLine.split(",");
-						String[] splitDate = split[2].split("/");
 						
 						//changes dates in file to Date object
 						DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-						Date startDate = dateFormat.parse(splitDate[2]); //check this
-						Date endDate = dateFormat.parse(splitDate[3]); //check this
-						
-						String startDateText = dateFormat.format(startDate).toString();
-						String endDateText =  dateFormat.format(endDate).toString();
+						Date startDate = dateFormat.parse(split[2]); //check this
+						Date endDate = dateFormat.parse(split[3]); //check this
 						
 				        if(((startDate.after(start) || startDate.equals(start))
 				  	          && (startDate.before(end)) || startDate.equals(end))
@@ -310,5 +414,6 @@ public class ReservationFrame {
 			        
 			     catch (IOException e1) {e1.printStackTrace();}
 	}
+	
 	
 }
