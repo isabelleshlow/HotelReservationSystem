@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -18,7 +19,7 @@ import java.util.Iterator;
  */
 public class ReservationList implements Serializable {
 	
-	private ArrayList<Reservation> list;
+	private static ArrayList<Reservation> list;
 	
 	public ReservationList() {
 		list = new ArrayList<Reservation>();
@@ -33,6 +34,11 @@ public class ReservationList implements Serializable {
 		return list.iterator();
 	}
 	
+	/**
+	 * Loads individual user reservation list
+	 * @param id
+	 * @return
+	 */
 	public ArrayList<Reservation> loadUserReservations(String id) {
 		ArrayList<Reservation> userReservations = new ArrayList<>();
 		for (Reservation r: list) {
@@ -61,7 +67,7 @@ public class ReservationList implements Serializable {
 		list.remove(r);
 	}
 	
-	public void save() {
+	public static void writeReservationToSystem(Reservation r) {
 	    try {
 	        File file = new  File("reservations.txt");
 
@@ -71,14 +77,15 @@ public class ReservationList implements Serializable {
 
 	        FileWriter fw = new FileWriter(file.getAbsoluteFile());
 	        BufferedWriter bw = new BufferedWriter(fw);
+	        PrintWriter pw = new PrintWriter(bw);
 	        
 			DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-			for (Reservation r: list) {
-				bw.write(r.getGuestId()+","+dateFormat.format(r.getStartDate())+","+dateFormat.format(r.getClass())+","+r.getRoomNumber());
+				pw.write(r.getGuestId()+","+dateFormat.format(r.getStartDate())+","+dateFormat.format(r.getClass())+","+r.getRoomNumber());
 				//guestId,startDate,endDate,roomNumber
-			}
+			
 	        bw.close();
 	    } 
+	    
 	    
 	    catch (IOException e) {
 	        e.printStackTrace();

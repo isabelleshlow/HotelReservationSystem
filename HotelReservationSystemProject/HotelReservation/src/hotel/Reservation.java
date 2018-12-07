@@ -11,7 +11,7 @@ public class Reservation implements Serializable {
 	private Date endDate;
 	private String guestId;
 	private Room room;
-	private String transactionId;
+	private String transactionDate;
 	
 	public Reservation(Date start, Date end, String id) {
 		this.startDate = start;
@@ -19,12 +19,12 @@ public class Reservation implements Serializable {
 		this.guestId = id;
 	}
 	
-	public Reservation(Date sd, Date ed, String id, Room r, String transId) {
+	public Reservation(Date sd, Date ed, String id, Room r, String tranDate) {
 		this.startDate = sd;
 		this.endDate = ed;
 		this.guestId = id;
 		this.room = r;
-		this.transactionId = transId;
+		this.transactionDate = tranDate;
 	}
 	
 	public Date getStartDate() {
@@ -44,7 +44,7 @@ public class Reservation implements Serializable {
 	}
 
 	public String getTransactionId() {
-		return transactionId;
+		return transactionDate;
 	}
 	
 	public int getPrice() {

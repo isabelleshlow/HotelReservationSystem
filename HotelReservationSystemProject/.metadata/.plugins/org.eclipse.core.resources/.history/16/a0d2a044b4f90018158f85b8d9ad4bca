@@ -1,0 +1,135 @@
+package hotel;
+
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.Scanner;
+
+public class Room implements RoomBase{
+	private int roomNumber;
+	private String roomType;
+	private int price;
+	private ReservationList reservationList;
+	private ArrayList<LocalDate> allBookedDates;
+
+	public Room(int rn, int p) {
+		this.roomNumber = rn;
+		this.price = p;
+	}
+	public Room(){}
+	
+	public Room(String roomType) {
+		if (roomType.substring(0, 1).equalsIgnoreCase("E")) {
+			this.roomType = "Economic";
+			this.price = 100;
+		}
+		
+		else if (roomType.substring(0, 1).equalsIgnoreCase("L")) {
+			this.roomType = "Luxurious";
+			this.price = 300;
+		}
+		
+		reservationList = new ReservationList();
+	}
+	
+	@Override
+	public int getRoomNumber() {
+		return roomNumber;
+	}
+	
+	@Override
+	public int getRoomPrice() {
+		return price;
+	}
+	@Override
+	public String getRoomType() {
+		return roomType;
+	}
+	@Override
+	public ReservationList getReservations() {
+		return reservationList;
+	}
+	@Override
+	public void setRoomType(String type){
+		roomType = type;
+		
+		//????????????
+		if (roomType.substring(0, 1).equalsIgnoreCase("E")) {
+			this.price = 100;
+		}
+		
+		else if (roomType.substring(0, 1).equalsIgnoreCase("L")) {
+			this.price = 300;
+		}
+	}
+	@Override
+	public void setReservation(ReservationList rl) {
+		reservationList = rl;
+	}
+	@Override
+	public void addReservation(Reservation r) {
+		reservationList.add(r);
+	}
+	@Override
+	public void cancelReservation(Reservation r) {
+		reservationList.cancel(r);
+	}
+	
+	public void checkAvailable(Reservation r)
+	{
+		File userList = new File("userList.txt");
+		boolean logInSucess = false;
+		if (startAccCheck == true)
+		{
+			    try {
+
+			    
+				Scanner in = new Scanner(new FileReader(userList));
+				while(in.hasNextLine()){
+				
+					String currentLine = in.nextLine();
+				//	System.out.println(currentLine);
+					String[] split = currentLine.split(",");
+				//	System.out.println(split[0]+split[1]+split[2]);
+			        User tempUser = new Guest(split[0],split[1],split[2]);
+
+			    //    System.out.println(split[1].length());
+			     //   System.out.println(split[2].length());
+
+			      //  System.out.println(answerTextList.get(0).getText());
+			       // System.out.println(answerTextList.get(1).getText());
+			        logInSucess = tempUser.verification((answerTextList.get(0).getText()), (answerTextList.get(1).getText()));
+			        
+			        if (logInSucess==true)
+			        {
+			        	ReservationFrame resFrame = new ReservationFrame();
+			        	resFrame.makeReservationFrame();
+			        	frame.dispose();
+			        	break;
+			        }
+			        
+					
+				}
+	
+			        
+			    } catch (IOException e1) {e1.printStackTrace();}
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+	
+
+	
+	
+}

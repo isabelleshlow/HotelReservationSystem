@@ -19,12 +19,20 @@ public abstract class User {
         return id;
     }
     
+    public void setId(String anId){
+    	this.id = anId;
+    }
+    
     public String getPassword() {
         return password;
     }
     
     public String getUsername() {
         return username;
+    }
+    
+    public void setUsername(String aUsername){
+    	this.username = aUsername;
     }
     
     public ArrayList<Reservation> getReservations() {

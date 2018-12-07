@@ -414,7 +414,8 @@ import javax.swing.*;
 									        
 									        if (logInSucess==true)
 									        {
-									        	ReservationFrame resFrame = new ReservationFrame();
+									        	
+									        	ReservationFrame resFrame = new ReservationFrame(tempUser);
 									        	resFrame.makeReservationFrame();
 									        	frame.dispose();
 									        	break;

@@ -1,10 +1,20 @@
 package hotel;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.Scanner;
 
 public class Room implements RoomBase{
 	private int roomNumber;
@@ -75,6 +85,64 @@ public class Room implements RoomBase{
 	public void cancelReservation(Reservation r) {
 		reservationList.cancel(r);
 	}
+	
+	
+	//part of Stina and Mata's code from Room
+		public static String[] isAvailable(Date start, Date end) throws ParseException, IOException {
+			boolean datesDontContradict = false;
+			String[] allAvail = new String[20];
+		
+					File userList = new File("reservations.txt");
+					if (!userList.exists()) {
+			            userList.createNewFile();
+			        }
+					
+					
+				    try {
+				    	
+				    	//check if start and end contradict
+				        if(((start.after(start) || start.equals(start))
+				  	          && (start.before(end)) || start.equals(end))
+				  	          ||  ((end.after(start) || end.equals(start)) 
+				                && (end.before(end) || end.equals(end))))
+				        {
+				        	datesDontContradict = true;
+				        	
+				        }
+				    	
+				    	
+					Scanner in = new Scanner(new FileReader(userList));
+					while(in.hasNextLine()){
+						
+							String currentLine = in.nextLine();
+							String[] split = currentLine.split(",");
+							
+							//changes dates in file to Date object
+							DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+							Date startDate = dateFormat.parse(split[2]); //check this
+							Date endDate = dateFormat.parse(split[3]); //check this
+							
+					        
+					        if(datesDontContradict == true)
+					        {
+					        	for (int i = 1; i<=20; i++){
+					        		
+					        	String avail = ("Room #"+i+" is available");
+					        	allAvail[i] = avail;
+					        	
+					        	
+					        	}
+					        }
+				        }	
+					}
+		
+				        
+				     catch (IOException e1) {e1.printStackTrace();}
+				    
+				   return allAvail;
+				    
+		}
+
 	
 
 	
