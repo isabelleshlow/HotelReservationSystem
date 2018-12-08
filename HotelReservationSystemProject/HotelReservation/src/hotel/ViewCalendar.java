@@ -23,10 +23,14 @@ public class ViewCalendar
    static String yearText, monthText, dayText, whichButton;
    static boolean closed = false;
    static User theUser;
+   ArrayList<ChangeListener> listeners;
+
    
    public ViewCalendar(User aUser, String which){
 	   this.theUser = aUser;
 	   this.whichButton = which;
+		listeners = new ArrayList<ChangeListener>();
+
    }
     
     public static String getYear(){
@@ -352,5 +356,11 @@ public class ViewCalendar
             setForeground(Color.black);
             return this;
         }
+    }
+    
+    
+    public void attach(ChangeListener c)
+    {
+       listeners.add(c);
     }
 }
