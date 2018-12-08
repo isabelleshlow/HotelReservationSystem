@@ -6,3 +6,6 @@
 1543821404476	Rename local variable 'd2'
 1543826011465	Rename local variable 'luxuriousButton'
 1544207574494	Rename field 'transactionId'
+1544225900421	Rename local variable 'checkInDate'
+1544225951600	Rename local variable 'checkOutDate'
+1544230773327	Rename method 'update'

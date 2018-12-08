@@ -23,7 +23,7 @@ import javax.swing.*;
 
 public class HotelReservationSystem {	
 	
-	private static UserDatabase userList = new UserDatabase();
+//	private static UserDatabase userList = new UserDatabase();
 	
 	public static void main(String[] args)
 	{
@@ -200,8 +200,8 @@ public class HotelReservationSystem {
 							String aName = (answerTextList.get(0)).getText();
 							String aID = (answerTextList.get(1)).getText();
 							String aPassword = (answerTextList.get(2)).getText();
-							User g = new Guest(aName, aID, aPassword);
-							userList.addGuest(g);
+				//			User g = new Guest(aName, aID, aPassword);
+						//	userList.addGuest(g);
 
 							try {
 								File file = new  File("userList.txt");

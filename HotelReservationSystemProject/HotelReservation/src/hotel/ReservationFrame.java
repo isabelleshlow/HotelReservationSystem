@@ -14,6 +14,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -24,6 +25,11 @@ public class ReservationFrame {
 	final int FIELD_WIDTH = 20;
 	User theUser;
 	String transDate;
+	JTextField checkInDateText = new JTextField(FIELD_WIDTH);
+	JTextField checkOutDateText = new JTextField(FIELD_WIDTH);
+
+	
+	
 	public ReservationFrame(User aUser)
 	{
 		this.theUser = aUser;
@@ -125,6 +131,15 @@ public class ReservationFrame {
 		
 		
 	}
+	
+	
+	public void updateCheckIn(String dateString){
+		this.checkInDateText.setText(dateString);
+	}
+	public void updateCheckOut(String dateString){
+		this.checkOutDateText.setText(dateString);
+	}
+	
 	public void makeReservation()
 	{
 		JFrame frame = new JFrame();
@@ -142,10 +157,8 @@ public class ReservationFrame {
 		final JLabel checkOutText = new JLabel("Check out");
 		
 		//make this open GUI calendar
-		JButton checkInButton = new JButton("(MM/dd/YYYY)");
-		JTextField checkInDate = new JTextField(FIELD_WIDTH);
-		JButton checkOutButton = new JButton("(MM/dd/YYYY)");
-		JTextField checkOutDate = new JTextField(FIELD_WIDTH);
+		JButton checkInButton = new JButton("(Month/dd/YYYY)");
+		JButton checkOutButton = new JButton("(Month/dd/YYYY)");
 		checkInButton.addMouseListener(
 				new MouseListener(){
 
@@ -153,10 +166,57 @@ public class ReservationFrame {
 					public void mouseClicked(MouseEvent arg0) {
 						// TODO Auto-generated method stub
 						//open GUI CALENDAR HERE
+						String whichOne = "in";
+			        	ViewCalendar calFrame = new ViewCalendar(theUser, whichOne);
+
+						calFrame.viewCalendarFrame();
 						//have GUI calendar return start date variables
-						//Date date = new Date(yr, month, date);
-						//SimpleDateFormat dt = new SimpleDateFormat("MM/dd/YYYY");
-						//checkInDate.setText(dt.format(gegeg));
+						frame.dispose();
+							
+						
+					}
+
+					@Override
+					public void mouseEntered(MouseEvent arg0) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void mouseExited(MouseEvent arg0) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void mousePressed(MouseEvent arg0) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void mouseReleased(MouseEvent arg0) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+				});
+		
+		checkOutButton.addMouseListener(
+				new MouseListener(){
+
+					@Override
+					public void mouseClicked(MouseEvent arg0) {
+						// TODO Auto-generated method stub
+						//open GUI CALENDAR HERE
+						String whichOne = "out";
+			        	ViewCalendar calFrame = new ViewCalendar(theUser, whichOne);
+
+						calFrame.viewCalendarFrame();
+						//have GUI calendar return start date variables
+						frame.dispose();
+							
+						
 					}
 
 					@Override
@@ -328,10 +388,10 @@ public class ReservationFrame {
 		//TODO need to add in the selectable date stuffs/////////////
 		cont1.add(checkInText);
 		cont1.add(checkInButton);
-		cont1.add(checkInDate);
+		cont1.add(checkInDateText);
 		cont1.add(checkOutText);
 		cont1.add(checkOutButton);
-		cont1.add(checkOutDate);
+		cont1.add(checkOutDateText);
 		
 		
 		cont2.add(roomTypeText);

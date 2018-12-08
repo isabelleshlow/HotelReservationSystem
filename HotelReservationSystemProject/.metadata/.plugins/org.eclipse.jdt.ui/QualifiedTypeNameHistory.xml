@@ -17,4 +17,6 @@
 <fullyQualifiedTypeName name="java.lang.reflect.Array"/>
 <fullyQualifiedTypeName name="java.awt.BorderLayout"/>
 <fullyQualifiedTypeName name="java.time.LocalDate"/>
+<fullyQualifiedTypeName name="java.util.Calendar"/>
+<fullyQualifiedTypeName name="java.awt.Graphics"/>
 </qualifiedTypeNameHistroy>
