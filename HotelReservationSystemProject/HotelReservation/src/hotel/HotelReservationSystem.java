@@ -358,9 +358,6 @@ public class HotelReservationSystem {
 		// MATA - added rooms; first 10 are economic and last 10 are luxurious
 		Room[] rooms = new Room[20];
 		
-		//add "Sign up" and "Sign in" buttons
-		JButton signUpButton = new JButton("Sign Up");
-		JButton signInButton = new JButton("Sign In");
 		for(int i = 0; i < rooms.length; i++)
 		{
 			if(i >= 10)
@@ -487,8 +484,6 @@ public class HotelReservationSystem {
 		
 		frame.setLayout(new FlowLayout());
 		frame.add(text1);
-		frame.add(signUpButton);
-		frame.add(signInButton);
 		frame.add(loadButton);
 		frame.add(viewButton);
 		frame.add(saveButton);
@@ -503,6 +498,4 @@ public class HotelReservationSystem {
 	}
 	
 }
-
-
 
