@@ -46,10 +46,8 @@ public abstract class User {
     public boolean verification(String id, String password) {
         if(this.id.equals(id) && this.password.equals(password))
         {
-        	System.out.println("Log in Sucess");
         	return true;
         }
-        System.out.println("Log in Fail");
         return false;
     }
     

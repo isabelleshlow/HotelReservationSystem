@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 INDEX VERSION 1.130+C:\Users\User\Documents\GitHub\HotelReservationSystem\HotelReservationSystemProject\.metadata\.plugins\org.eclipse.jdt.core
 2809250744.index
 1644702904.index
@@ -14,6 +15,10 @@ INDEX VERSION 1.130+C:\Users\User\Documents\GitHub\HotelReservationSystem\HotelR
 808374113.index
 2855899100.index
 414978335.index
+=======
+INDEX VERSION 1.130+C:\Users\Justin\Documents\GitHub\HotelReservationSystem\HotelReservationSystemProject\.metadata\.plugins\org.eclipse.jdt.core
+3323497099.index
+>>>>>>> Stashed changes
 1068468570.index
 471236001.index
 351221734.index

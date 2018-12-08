@@ -319,9 +319,14 @@ public class HotelReservationSystem {
 									{
 										ReservationFrame resFrame = new ReservationFrame(tempUser);
 										resFrame.makeReservationFrame();
+										System.out.println("Log in successful");
 										frame.dispose();
 										break;
 									}
+								}
+								if(!logInSuccess)
+								{
+									System.out.println("Failed to log in");
 								}
 							} 
 							catch (IOException e1) {
