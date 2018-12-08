@@ -10,6 +10,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -348,27 +349,159 @@ public class HotelReservationSystem {
 
 	public static void aManagerOption()
 	{
-//		JFrame frame = new JFrame();
-//		final int FIELD_WIDTH = 30;
-//		final JTextField text = new JTextField(FIELD_WIDTH);
-//		text.setText("Hello, CIJ Manager! Today's date is: " + LocalDate.now().toString() + "\nWhat would you like to do today?");
-//
-//		JButton loadReservationButton = new JButton("Load Existing Reservations");
-//		JButton viewInformationButton = new JButton("View Room Information");
-//		JButton saveButton = new JButton("Save");
-//		JButton quitButton = new JButton("Quit");
-//
-//		frame.setLayout(new FlowLayout());
-//		frame.add(text);
-//		frame.add(loadReservationButton);
-//		frame.add(viewInformationButton);
-//		frame.add(saveButton);
-//		frame.add(quitButton);
-//
-//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		frame.pack();
-//		frame.setVisible(true);			
+		
+		JFrame frame = new JFrame();
+		final int FIELD_WIDTH = 30;
+		final JTextField text = new JTextField(FIELD_WIDTH);
+		text.setText("Hello! Today's date is: " + LocalDate.now().toString());
+		final JLabel text1 = new JLabel("Hello! Today's date is: " + LocalDate.now().toString() + ". What would you like to do?");
+		// MATA - added rooms; first 10 are economic and last 10 are luxurious
+		Room[] rooms = new Room[20];
+		
+		//add "Sign up" and "Sign in" buttons
+		JButton signUpButton = new JButton("Sign Up");
+		JButton signInButton = new JButton("Sign In");
+		for(int i = 0; i < rooms.length; i++)
+		{
+			if(i >= 10)
+			{
+				rooms[i] = new Room("L");
+			}
+			else
+			{
+				rooms[i] = new Room("E");
+			}
+		}
+		
+		// MATA - ArrayList containing all guest reservations
+		ArrayList<Reservation> allReservations = new ArrayList<Reservation>();
+		
+		//add buttons
+		JButton loadButton = new JButton("Load");
+		JButton viewButton = new JButton("View");
+		JButton saveButton = new JButton("Save");
+		JButton quitButton = new JButton("Quit");
+		
+		//add ActionListener to button
+		loadButton.addActionListener(new ActionListener() { public void actionPerformed(ActionEvent e)
+	    													{
+																try 
+																{
+																	File reservations = new  File("reservations.txt");
+
+																	if(!reservations.exists()) 
+																	{
+																		reservations.createNewFile();
+																	}
+		        
+																	Scanner in = new Scanner(new FileReader(reservations));
+		        
+																	while(in.hasNextLine())
+																	{
+																		String currentLine = in.nextLine();
+																		String[] split = currentLine.split(",");
+																		String guest = split[0];
+																		
+																		// parse startDate into a LocalDate variable
+																		String[] dateParse = split[1].split("/");
+																		
+										    	    					String month = dateParse[0];
+										    	    					int monthConverter = Integer.valueOf(month);
+										    	    					
+										    	    					
+										    	    					String day = dateParse[1];
+										    	    					int dayConverter = Integer.valueOf(day);
+										    	    					
+										    	    					
+										    	    					String year = dateParse[2];
+										    	    					int yearConverter = Integer.valueOf(year);
+										    	    					
+										    	    					
+										    	    					LocalDate startDate = LocalDate.of(yearConverter, monthConverter, dayConverter);
+										    	    					
+										    	    					// parse endDate into a LocalDate variable
+										    	    					dateParse = split[2].split("/");
+																		
+										    	    					month = dateParse[0];
+										    	    					monthConverter = Integer.valueOf(month);
+										    	    					
+										    	    					day = dateParse[1];
+										    	    					dayConverter = Integer.valueOf(day);										    	    					
+										    	    					
+										    	    					year = dateParse[2];
+										    	    					yearConverter = Integer.valueOf(year);
+										    	    					
+										    	    					LocalDate endDate = LocalDate.of(yearConverter, monthConverter, dayConverter);
+										    	    					
+										    	    					String roomType = split[3];
+																		int roomNumber = Integer.parseInt(split[4]);																			
+																		
+																		if(roomType.equals("E"))
+																		{
+																			Room theRoom = rooms[roomNumber + 9];
+																			theRoom.book(startDate, endDate);
+																			// convert LocalDates to Dates because of Reservation constructor
+																			Reservation r = new Reservation(Date.valueOf(startDate), Date.valueOf(endDate), guest, theRoom, "");
+																			allReservations.add(r);
+																		}
+																		if(roomType.equals("L"))
+																		{
+																			Room theRoom = rooms[roomNumber - 1];
+																			theRoom.book(startDate, endDate);
+																			// convert LocalDates to Dates because of Reservation constructor
+																			Reservation r = new Reservation(Date.valueOf(startDate), Date.valueOf(endDate), guest, theRoom, "");
+																			allReservations.add(r);
+																		}
+																	}
+																	in.close();
+																} 
+		    
+																catch (IOException e1) 
+																{
+																	e1.printStackTrace();
+																}
+																
+																System.out.println("Reservations successfully loaded");
+	    													}
+														   });
+		
+		viewButton.addActionListener(new ActionListener() { public void actionPerformed(ActionEvent e)
+	    													{
+																
+	    													}
+	    												  });
+		
+		saveButton.addActionListener(new ActionListener() { public void actionPerformed(ActionEvent e)
+															{
+																System.out.println("System successfully saved");
+															}
+														  });
+		
+		quitButton.addActionListener(new ActionListener() { public void actionPerformed(ActionEvent e)
+															{
+																System.out.println("System successfully saved and exited");
+																// close frame
+																frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+															}
+														  });
+		
+		frame.setLayout(new FlowLayout());
+		frame.add(text1);
+		frame.add(signUpButton);
+		frame.add(signInButton);
+		frame.add(loadButton);
+		frame.add(viewButton);
+		frame.add(saveButton);
+		frame.add(quitButton);
+		
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.pack();
+		frame.setResizable(false);
+		frame.setVisible(true);
+		
+		
 	}
+	
 }
 
 

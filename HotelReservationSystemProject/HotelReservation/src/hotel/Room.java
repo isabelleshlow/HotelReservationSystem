@@ -15,13 +15,18 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Scanner;
-
+// add this to imports
+	import java.time.temporal.ChronoUnit;
+	
 public class Room implements RoomBase{
+	
+
+
 	private int roomNumber;
 	private String roomType;
 	private int price;
 	private ReservationList reservationList;
-	private ArrayList<LocalDate> allBookedDates;
+	private ArrayList<LocalDate> allBookedDates = new ArrayList<LocalDate>();
 
 	public Room(int rn, int p) {
 		this.roomNumber = rn;
@@ -143,6 +148,17 @@ public class Room implements RoomBase{
 				    
 		}
 
+		// this can go anywhere in the room class
+		public void book(LocalDate start, LocalDate end)
+		{
+			int between = (int) ChronoUnit.DAYS.between(start, end);
+			LocalDate datesToAdd = start;
+			for(int i = 0; i < between; i++)
+			{
+				allBookedDates.add(datesToAdd);
+				datesToAdd = datesToAdd.plusDays(1);
+			}
+		}
 	
 
 	
